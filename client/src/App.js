@@ -10,6 +10,7 @@ const App = () => {
   const [documents, setDocuments] = useState(null);
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
+  const [searchLimit, setSearchLimit] = useState(null);
   const [categories, setCategories] = useState([]);
 
   const handleCategoryChange = (event) => {
@@ -34,6 +35,7 @@ const App = () => {
         fromDate: fromDate ? fromDate.toISOString() : null,
         toDate: toDate ? toDate.toISOString() : null,
         category: categories,
+        limit: searchLimit,
       },
     };
     axios
@@ -77,6 +79,15 @@ const App = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </label>
+              </li>
+              <li>
+                <input 
+                  className='limit' 
+                  type='number' 
+                  placeholder='Limit' 
+                  value={searchLimit} 
+                  onChange={(e) => setSearchLimit(e.target.value)} 
+                />
               </li>
               <li>
                 <div className='dropdown'>
@@ -288,19 +299,21 @@ const App = () => {
         {documents && (
           <div className='search-results'>
             {documents.length > 0 ? (
-              <p> Number of hits: {documents.length}</p>
+              <p> Results: {documents.length}</p>
             ) : (
               <p> No results found. Try broadening your search criteria.</p>
             )}
             {documents.map((document) => (
               <div className='results-card'>
                 <div className='results-text'>
-                  <p>Headline: {document._source.headline}</p>
-                  <p>Description: {document._source.short_description}</p>
-                  <p>Time: {document._source['@timestamp']}</p>
-                  <p>Category: {document._source.category}</p>
-                  <p>Author: {document._source.authors}</p>
-                  <p>Article URL: {document._source.link}</p>
+                  <p>{document._source.category}</p>
+                  <h2>
+                    <a className='headline' href={document._source.link}>{document._source.headline}</a>
+                  </h2>
+                  <h3>{document._source.short_description}</h3>
+                  <p>
+                    {document._source.authors} | {document._source['@timestamp']}
+                  </p>
                 </div>
               </div>
             ))}
