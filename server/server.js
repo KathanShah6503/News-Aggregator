@@ -5,15 +5,7 @@ const cors = require('cors'); // Cross-Origin Resource Sharing
 
 const app = express();
 
-// const port = 3001;
-
-// const data = require('./data-management/retrieve_and_ingest_data');
-
-// app.use('/ingest_data', data);
-
 app.use(cors());              //enable all CORS requests
-
-// app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
 
 //create an endpoint to handle http GET requests
 app.get('/results', async (req, res) => {
@@ -29,7 +21,7 @@ app.get('/results', async (req, res) => {
             //index name
             index: 'news_articles',
             body: {
-                // size: 100,
+                size: 100,
                 query: {
                     bool: {
                         must: [
@@ -40,16 +32,29 @@ app.get('/results', async (req, res) => {
                                 },
                             },
                         ],
-                        filter: passedFromDate || passedToDate ? [
-                            {
-                                range: {
-                                    "@timestamp": {
-                                        gte: passedFromDate || undefined,
+                        filter: [
+                            ...(passedFromdate || passedToDate
+                              ? [
+                                  {
+                                    range: {
+                                      '@timestamp': {
+                                        gte: passedFromdate || undefined,
                                         lte: passedToDate || undefined,
+                                      },
                                     },
-                                },
-                            },
-                        ] : undefined,           
+                                  },
+                                ]
+                              : []),
+                            ...(passedCategory
+                              ? [
+                                  {
+                                    terms: {
+                                      category: passedCategory,
+                                    },
+                                  },
+                                ]
+                              : []),
+                          ],           
                     },
                 }
             }
