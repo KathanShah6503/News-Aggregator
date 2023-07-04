@@ -45,8 +45,8 @@ router.get('/news-aggregator', async (req, res) => {
                 for (const article of results) {
                     if (!indexedArticles.has(article.url)) {
                         const articleObject = {
-                            id: article.source.id,
-                            name: article.source.name,
+                            id: article.source ? article.source.id: null,
+                            name: article.source ? article.source.name: null,
                             author: article.author,
                             title: article.title,
                             description: article.description,
