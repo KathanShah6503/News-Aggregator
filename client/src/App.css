@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
+/* * {
+  font-family: 'Open Sans Condensed', sans-serif;
+} */
+
+body {
+  background-image: url(https://img.freepik.com/free-photo/top-view-old-french-newspaper-pieces_23-2149318857.jpg?w=1060&t=st=1688420176~exp=1688420776~hmac=a6a8432eff68761f48578fa43715ac7054a218ac5a0333cc3ba3def9797e7b57);
+  /* background-color: rgb(28, 28, 28); */
+  background-position-x: center;
+  background-position-y: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-origin: initial;
+  background-clip: initial;
+  margin: 0;
+}
+
+div {
+  color: white;
+}
+
+.nav {
+  width: 100%;
+  float: left;
+}
+
+.nav-bar {
+  margin: 0;
+  padding: 8px;
+  height: 50px;
+  background-color: rgb(28, 28, 28);
+}
+
+.nav-bar li {
+  display: inline;
+  margin-top: 0px;
+  font-size: 2.5em;
+}
+
+.directions {
+  margin-left: 14px;
+  font-size: 1.5em;
+  color: initial;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  font-family: inherit;
+}
+
+.type-selector {
+  margin-left: -30px;
+}
+
+.type-selector li {
+  float: left;
+  display: inline;
+  margin-left: 4px;
+  margin-top: -19px;
+  font-style: inherit;
+}
+
+.type-selector li:focus,
+.type-selector li:hover {
+  outline: none;
+  border: 1px solid #bbbbbb;
+}
+
+.form {
+  width: 400px;
+  height: 30px;
+  padding: 5px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.type-selector button:hover {
+  color: #be3400;
+  border: 0.1rem #404040 solid; 
+}
+
+.type-selector button {
+  width: 25px;
+  height: 25px;
+  padding: auto;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(64, 0, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.type-selector li.search button{
+  width: 75px;
+  height: 30px;
+  padding: auto;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(64, 0, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-results {
+  display: block;
+  width: 100%;
+  margin-left: 13px;
+  font-family: inherit;
+}
+
+.results-card {
+  background-color: rgb(25, 129, 67, 1);
+  flex: 0 1 29rem;
+  height: 23rem;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 1px;
+  float: left;
+  margin: 1px;
+  margin-top: 5px;
+  margin-right: 10px;
+  padding: 10px epx;
+  justify-content: space-between;
+  max-width: 400px;
+}
+
+.results-text {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.react-datepicker-wrapper {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.react-datepicker__input-container {
+  display: inline-block;
+}
+
+.react-datepicker__input-container input {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.react-datepicker__input-container input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.react-datepicker__day--selected {
+  background-color: rgb(25, 129, 67);
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: rgb(25, 129, 67, 0.7);
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: rgb(25, 129, 67);
+}
+
+.react-datepicker__day--keyboard-selected:hover {
+  background-color: rgb(25, 129, 67, 0.7);
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+}
+
+.react-datepicker__day--today:hover {
+  background-color: rgb(25, 129, 67, 0.7);
+}
