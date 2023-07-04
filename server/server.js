@@ -14,6 +14,8 @@ app.get('/results', async (req, res) => {
     const passedQuery = req.query.q;
     const passedFromDate = req.query.fromDate;
     const passedToDate = req.query.toDate;
+    const passedCategory = req.query.category;
+    const passedSearchLimit = req.query.limit;
 
     //function to send the user's search query to elastic cloud
     async function sendESRequest() {
@@ -21,7 +23,7 @@ app.get('/results', async (req, res) => {
             //index name
             index: 'news_articles',
             body: {
-                size: 100,
+                size: passedSearchLimit || 100,
                 query: {
                     bool: {
                         must: [
@@ -33,12 +35,12 @@ app.get('/results', async (req, res) => {
                             },
                         ],
                         filter: [
-                            ...(passedFromdate || passedToDate
+                            ...( passedFromDate || passedToDate
                               ? [
                                   {
                                     range: {
                                       '@timestamp': {
-                                        gte: passedFromdate || undefined,
+                                        gte: passedFromDate || undefined,
                                         lte: passedToDate || undefined,
                                       },
                                     },
