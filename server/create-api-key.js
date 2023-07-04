@@ -9,7 +9,7 @@ async function generateApikeys(opts){
                     cluster: ['monitor'],
                     index: [
                         {
-                            names: ['news_article_v2'],
+                            names: ['news_articles'],
                             privileges: ['all']
                         },
                     ],

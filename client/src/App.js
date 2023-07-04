@@ -11,6 +11,7 @@ const App = () => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
 
+  //sedning a GET request to the server with the specified parameters
   const sendSearchRequest = () => {
     if (fromDate && toDate && fromDate > toDate) {
       alert('From date must be less than or equal to To date');
@@ -18,7 +19,7 @@ const App = () => {
     }
     const results = {
       method: 'GET',
-      url: 'http://localhost:3001/results',
+      url: 'http://localhost:5001/results',
       params: {
         q: searchQuery,
         fromDate: fromDate ? fromDate.toISOString() : null,
@@ -104,6 +105,7 @@ const App = () => {
             </li>
           </ul>
         </div>
+{/* how client handles the docuemens retrieved from the server */}
         {documents && (
           <div className='search-results'>
             {documents.length > 0 ? (
@@ -115,14 +117,15 @@ const App = () => {
               <div className='results-card'>
                 <div className='results-text'>
                   <p>Headline: {document._source.headline}</p>
-                  <p>Content: {document._source.content}</p>
-                  <p>Description: {document._source.description}</p>
+                  <p>Category: {document._source.category}</p>
+                  {/* <p>Content: {document._source.content}</p> */}
+                  <p>Description: {document._source.short_description}</p>
                   <p>Time: {document._source['@timestamp']}</p>
-                  <p>Source: {document._source.source.name}</p>
-                  <p>Author: {document._source.author}</p>
-                  <p>Article URL: {document._source.url}</p>
+                  {/* <p>Source: {document._source.name}</p> */}
+                  <p>Author: {document._source.authors}</p>
+                  <p>Article URL: {document._source.link}</p>
                   {/* <p>Significance: {document._source.sig}</p> */}
-                  <p>Image URL: {document._source.imageUrl}</p>
+                  {/* <p>Image URL: {document._source.imageUrl}</p> */}
                 </div>
               </div>
             ))}
