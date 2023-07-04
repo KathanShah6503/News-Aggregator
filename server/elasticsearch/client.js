@@ -1,3 +1,4 @@
+// connects server to elastic cloud via api key and cloud id
 const { Client } = require('@elastic/elasticsearch');
 const config = require('config');
 
@@ -9,6 +10,9 @@ const client = new Client({
   },
   auth: {
     apiKey: elasticConfig.apiKey,
+    // when changing index in elastic cloud, you must regenerate the api key
+    // username: elasticConfig.username,
+    // password: elasticConfig.password,
   },
 });
 
