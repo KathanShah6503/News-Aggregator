@@ -9,14 +9,16 @@ app.use(cors());
 
 app.get('/results', async (req, res) => {
     const passedQuery = req.query.q;
-    const passedFromdate = req.query.Fromdate;
+    const passedFromDate = req.query.fromDate;
     const passedToDate = req.query.toDate;
     const passedCategory = req.query.category;
+    const passedLimit = req.query.limit;
 
     async function sendESRequest() {
         const body = await client.search({
             index: 'news_articles',
             body: {
+                size: passedLimit || 100,
                 query: {
                     bool: {
                         must: [
@@ -27,16 +29,29 @@ app.get('/results', async (req, res) => {
                                 },
                             },
                         ],
-                        filter: passedFromdate || passedToDate ? [
-                            {
-                                range: {
-                                    "@timestamp": {
+                        filter: [
+                            ...(passedFromDate || passedToDate
+                              ? [
+                                  {
+                                    range: {
+                                      '@timestamp': {
                                         gte: passedFromdate || undefined,
                                         lte: passedToDate || undefined,
+                                      },
                                     },
-                                },
-                            },
-                        ] : undefined,           
+                                  },
+                                ]
+                              : []),
+                            ...(passedCategory
+                              ? [
+                                  {
+                                    terms: {
+                                      category: passedCategory,
+                                    },
+                                  },
+                                ]
+                              : []),
+                          ],           
                     },
                 }
             }
